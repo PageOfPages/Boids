@@ -1,0 +1,1 @@
+Boids is a simuluation that replicates artificial life. In its orginal form, it was used to simulate the movement of a flock of birds using only a few set of rules. Today, Boids has expanded its use into other applications. A famous use of this simulation was used by animation studios to create schools of fish in the movie Nemo.
