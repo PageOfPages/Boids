@@ -1,1 +1,1 @@
-oenviwn
+There are 3 main rules that each boid must follow in each simulation. The first rule is Seperation. The second rule is Alignment, and the third rule is Cohesion. Seperation states that boids must steer away from nearby boids to avoid crashing into them. Alignment states that boids must steer to move in the same direction as nearby boids. This helps the boids avoid crashing into each other. Cohesion states that boids must steer towards the center of any nearby boids in their range. 
