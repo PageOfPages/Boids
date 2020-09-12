@@ -3,7 +3,8 @@ import matplotlib.pyplot as plt
 def gcd(x, y):
     i=1
     print(x+y)
-    
+    plt.plot([i], [x+y], "bo")
+
     while (y):
         x,y = y, x%y
         
