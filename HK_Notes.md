@@ -8,13 +8,10 @@
 
 #### Pages 3-6
 
--2.8
--n = 11, but there is 10 agents
-- why do agents 10 and 11 agree, also which agent is 11
--Proof of Thereom 1.1 is confusing  
--What does the ysubscript(number) refer to?  
--Banach space?  
--Once I get to Thereom 2.1 I get lost with all the symbols and math  
+-2.8, Matrix set up, i and j refers to indices of rows and columns
+-n = 11, there are 10 numbers because they are showing the gaps
+-what does it mean by the agents agree?  
+-What does the ysubscript(number) refer to?     
 
 
 
