@@ -5,7 +5,30 @@ Given n amount of points. Points will continue
 to move to the Center of Mass until clusters converge
 and there is no movement. """ 
 
+import fractions
 
+def neighbors(point, positions):
+    """
+    Args:
+        point (int): a value in the range of 1 to the number of points
+        positions (dict): gives you the current positions
+    
+    Returns:
+        set [int]: the collection of neighbors of point
+    """
+    n = max(positions.keys())
+    result = set([point])
+    for i in reversed(range(1, point)):
+        if positions[point] - positions[i] <= 1: 
+            result.add(i)
+        else:
+            break 
+    for i in range(point+1, n+1):
+        if positions[i] - positions[point] <= 1:
+            result.add(i)
+        else:
+            break
+    return result
 
 def runner(pts):
     """Runs the simulation of boids moving towards each other.
@@ -19,40 +42,41 @@ def runner(pts):
 
     """
         
-    pd = 1.0 #initial distance between points at beginning of simulation (pd = "point distance")
+    pd = 1 #initial distance between points at beginning of simulation (pd = "point distance")
 
     #create points. key is point name and value is point location on number line
-    p_dict = {point:float(point) for point in range(pts)}
+    positions = {point:fractions.Fraction(point) for point in range(1,pts+1)}
+    neighborhood = {point:neighbors(point, positions) for point in range
 
     #at time 1, endpoints move in pd/2
     timestep = 1
-    p_dict[0], p_dict[pts-1] = pd/2, (pts-1-(pd/2))
+    positions[0], positions[pts-1] = pd/2, (pts-1-(pd/2))
 
     #create temporary dictionaries for new values and previous values
-    temp_dict = p_dict.copy()
-    last_dict = p_dict.copy()
+    temp_dict = positions.copy()
+    last_dict = positions.copy()
 
     while(True):
         timestep+=1
 
-        for pt in p_dict: 
-            pt_values = p_dict[pt]
+        for pt in positions: 
+            pt_values = positions[pt]
             total_pts = 1.0   
-            for pt2 in p_dict:  
-                if (abs(p_dict[pt]-p_dict[pt2]) <= pd) and pt!=pt2:
-                    pt_values += p_dict[pt2]
+            for pt2 in positions:  
+                if (abs(positions[pt]-positions[pt2]) <= pd) and pt!=pt2:
+                    pt_values += positions[pt2]
                     total_pts+=1
             temp_dict[pt] = pt_values/total_pts 
 
-        p_dict = temp_dict.copy()
+        positions = temp_dict.copy()
 
-        if notMoving(p_dict,last_dict):
+        if notMoving(positions,last_dict):
             break
         
-        last_dict = p_dict.copy()
+        last_dict = positions.copy()
 
     print (f"Given {pts} points, it will take {timestep} timesteps to get to the solution.\n")
-    print (f"Solution: \n {p_dict}")
+    print (f"Solution: \n {positions}")
 
 
 def notMoving(current, last):
@@ -81,7 +105,9 @@ def notMoving(current, last):
 
 
 #Test for 10 points
-runner(500)
+if __name__=="__main__":
+    runner(11)
+
 
 
 
