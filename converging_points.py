@@ -1,6 +1,6 @@
 """ Title: Boids
 Author: Paige Arnold, 
-Date: 8/11/2000
+Date: 8/11/2020
 Given n amount of points. Points will continue 
 to move to the Center of Mass until clusters converge
 and there is no movement. """ 
