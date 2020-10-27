@@ -92,11 +92,11 @@ def uniformHK(n):
 
 
 # testing to get cluster change pattern of convergence 
-def clusterHK(n, increment, group_size): 
+def clusterHK(n, incrementTop, incrementBottom, group_size): 
     steps = uniformHK(n)
     for i in range(0,group_size):
-        steps[i+1]+=Fraction(increment).limit_denominator()
-        steps[n-i]+=Fraction(increment).limit_denominator()
+        steps[i+1]+=Fraction(incrementTop).limit_denominator()
+        steps[n-i]+=Fraction(incrementBottom).limit_denominator()
     
     return steps  
 
@@ -130,8 +130,8 @@ def simulate(init_system):
 
 
 if __name__ == '__main__':
-    #simulate(uniformHK(11))
-    simulate(clusterHK(11, -.02, 2))
+    #simulate(uniformHK(20))
+    #simulate(clusterHK(20, .05, -.05, 2))
 
 
 # create tests, use plotlib to see variations 
