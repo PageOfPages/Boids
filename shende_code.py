@@ -100,6 +100,22 @@ def clusterHK(n, incrementTop, incrementBottom, group_size):
     
     return steps  
 
+def exponentialHK(n, incrementTop, incrementBottom, alpha): 
+    steps = uniformHK(n)
+    for i in range(0,group_size):
+        steps[i+1]+=Fraction(incrementTop).limit_denominator()
+        steps[n-i]+=Fraction(incrementBottom).limit_denominator()
+    
+    return steps  
+
+# def linearHK(n, incrementTop, incrementBottom, group_size): 
+#     steps = uniformHK(n)
+#     for i in range(0,group_size):
+#         steps[i+1]+=Fraction(incrementTop).limit_denominator()
+#         steps[n-i]+=Fraction(incrementBottom).limit_denominator()
+    
+#     return steps  
+
     
 def randomHK(n):
     return dict(zip(range(n+1), sorted(random.uniform(1, n+1)
