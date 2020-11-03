@@ -41,7 +41,7 @@ def neighborhood(config):
 
 def hk_next_config(config):
     """Returns the next configuration
-​
+
     Args:
         config (dict): point-index -> position fraction
     """
@@ -56,7 +56,6 @@ def hk_next_config(config):
 
 def isclose(config1, config2):
     """Checks if config1 and config2 are close enough to be deemed equal
-
     Args:
         config1, config2 (dict): successive HK dynamics configurations
     """
@@ -65,14 +64,11 @@ def isclose(config1, config2):
 
 def dumbbellHK(n):
     """Creates a dumbbell 
-
     The "bar" has n+1 >= 3 equally spaced points at 0, 1, ..., n 
     while the "bells" at each end have n points at distance 1/n 
     from the ends
-
     Args:
         n (int): n >= 2
-
     Returns:
         dictionary of point-indices and corresponding position fractions
     """
@@ -100,11 +96,12 @@ def clusterHK(n, incrementTop, incrementBottom, group_size):
     
     return steps  
 
-def exponentialHK(n, incrementTop, incrementBottom, alpha): 
+def exponentialHK(n, alpha): 
     steps = uniformHK(n)
-    for i in range(0,group_size):
-        steps[i+1]+=Fraction(incrementTop).limit_denominator()
-        steps[n-i]+=Fraction(incrementBottom).limit_denominator()
+    mid = math.ceil(n/2)
+    for i in range(1,mid):
+        steps[mid-i] = Fraction(steps[mid-i+1] - alpha**(i-1)).limit_denominator()
+        steps[mid+i] = Fraction(steps[mid+i-1] + alpha**(i-1)).limit_denominator()
     
     return steps  
 
@@ -115,8 +112,8 @@ def exponentialHK(n, incrementTop, incrementBottom, alpha):
 #         steps[n-i]+=Fraction(incrementBottom).limit_denominator()
     
 #     return steps  
-
-    
+ 
+ 
 def randomHK(n):
     return dict(zip(range(n+1), sorted(random.uniform(1, n+1)
                                        for i in range(1,n+1))))
@@ -124,7 +121,6 @@ def randomHK(n):
 
 def simulate(init_system):
     """Determine HK dynamics of system
-
     Args:
         init_system (dict): initial configuration of agents
     """
@@ -136,7 +132,7 @@ def simulate(init_system):
         for pt in evolution[step]:
             print('\tAgent {}: {:.3f} or {}'.format(pt,
                                                     float(evolution[step][pt]),
-                                                    evolution[step][pt]))
+                                                    (evolution[step][pt])))
         step += 1
         evolution[step] = hk_next_config(evolution[step-1])
         print('Positions: ')
@@ -147,7 +143,5 @@ def simulate(init_system):
 
 if __name__ == '__main__':
     #simulate(uniformHK(20))
-    #simulate(clusterHK(20, .05, -.05, 2))
+    simulate(exponentialHK(21, 0.99))
 
-
-# create tests, use plotlib to see variations 
