@@ -2,6 +2,8 @@ from fractions import Fraction
 import math
 import random 
 from collections import defaultdict
+import numpy as np
+
 # import matplotlib.pyplot as plt
 # from matplotlib.ticker import MultipleLocator
 
@@ -141,7 +143,63 @@ def simulate(init_system):
     print('System took {} steps to converge!'.format(step-1))
 
 
+def create_data(init_system):
+    """Determine HK dynamics of system
+    Args:
+        init_system (dict): initial configuration of agents
+    Returns: 
+        2d numpy array of floats. Rows of agents and Columns of steps.
+    """
+    evolution = defaultdict(dict)
+    step = 0
+    evolution[step] = init_system
+    # initializer 2d list 
+    data = []
+    # Populate the list (appending)
+    while True: # update the system
+        step_data = []  #Step column in a table of --> rows = agents and columns = steps
+        for pt in evolution[step]:
+            pt_val = float(evolution[step][pt])
+            step_data.append(pt_val)
+        data.append(step_data)
+        step += 1
+        evolution[step] = hk_next_config(evolution[step-1])
+        if isclose(evolution[step], evolution[step-1]):
+            break
+    steps_to_conv = format(step-1) # Not used. Steps can be determined by the amount of columns
+    np_data = np.array(data).T
+    return np_data
+
+
+# ///////////////////////////////////////// TO DO ////////////////////////////////////////////
+
+# def collect_data():
+    '''Collect HK dynamics of system
+    Args:
+        data (numpy 2d array): final configuration of agents where 
+                                rows = agents and columns = steps  
+    Returns:
+        List of steps_of_cluster (List of ints), cluster_pts (List of floats), 
+        cluster_vals (List of lists of ints)
+    '''
+
+# def check_neighbors():
+
+
+'''Need an SQLite file for an all_data_table of all and a method to query users. 
+    1. create all_data_table of n vs alpha
+    2. query users for range of n and alpha to test
+    3. If data in all_data_table does not exist, create. 
+    4. create methods for user to query data
+        a. query for all clusters for n 
+        b. query for all clusters for a
+        c. query for all clusters for n and a
+'''
+# ///////////////////////////////////////////////////////////////////////////////////////////
+
+
+# Test Methods
 if __name__ == '__main__':
     #simulate(uniformHK(20))
+    # create_data(exponentialHK(5, 0.99))
     simulate(exponentialHK(21, 0.99))
-
