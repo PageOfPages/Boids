@@ -166,14 +166,14 @@ def create_data(init_system):
         evolution[step] = hk_next_config(evolution[step-1])
         if isclose(evolution[step], evolution[step-1]):
             break
-    steps_to_conv = format(step-1) # Not used. Steps can be determined by the amount of columns
+    #steps_to_conv = format(step-1) # Not used. Steps can be determined by the amount of columns
     np_data = np.array(data).T
     return np_data
 
 
 # ///////////////////////////////////////// TO DO ////////////////////////////////////////////
 
-# def collect_data():
+def collect_data(np_data):
     '''Collect HK dynamics of system
     Args:
         data (numpy 2d array): final configuration of agents where 
@@ -182,6 +182,16 @@ def create_data(init_system):
         List of steps_of_cluster (List of ints), cluster_pts (List of floats), 
         cluster_vals (List of lists of ints)
     '''
+    clusters = []
+
+    for i in range(1, step)
+        for j in range (1, pt)
+         if (abs(np_data[j][i] - np_data[j+1][i]) > 1)
+            if(np_data[j][i] == np_data[j-1][i])
+                clusters.append('Agents: {}, {}, {} = {:.3f} at step: {}'.format(j, j-1, j-2, float(np_data[j][i]), i))
+
+    print(clusters)            
+
 
 # def check_neighbors():
 
