@@ -3,10 +3,12 @@ import math
 import random 
 from collections import defaultdict
 import numpy as np
+from collections import namedtuple
 
 # import matplotlib.pyplot as plt
 # from matplotlib.ticker import MultipleLocator
 
+Cluster = namedtuple("Cluster",["interval", "pos", "step"])
 
 def potential(systm):
     """Computes a potential function that is always non-negative and zero at equilibrium
@@ -168,13 +170,16 @@ def create_data(init_system):
             break
     #steps_to_conv = format(step-1) # Not used. Steps can be determined by the amount of columns
     np_data = np.array(data).T
+    print(np_data)   #commenting out so I can test collect_data
     return np_data
+
+    #create another arr 
 
 
 # ///////////////////////////////////////// TO DO ////////////////////////////////////////////
 
 def collect_data(np_data):
-    '''Collect HK dynamics of system
+    '''Collect HK dynamics of system 
     Args:
         data (numpy 2d array): final configuration of agents where 
                                 rows = agents and columns = steps  
@@ -182,15 +187,40 @@ def collect_data(np_data):
         List of steps_of_cluster (List of ints), cluster_pts (List of floats), 
         cluster_vals (List of lists of ints)
     '''
-    clusters = []
+    all_clusters = []
+    steps_of_cluster = []
+    cluster_pts = []
+    clustter_vals = []
 
-    for i in range(1, step)
-        for j in range (1, pt)
-         if (abs(np_data[j][i] - np_data[j+1][i]) > 1)
-            if(np_data[j][i] == np_data[j-1][i])
-                clusters.append('Agents: {}, {}, {} = {:.3f} at step: {}'.format(j, j-1, j-2, float(np_data[j][i]), i))
+    #use namedTuple to store interval, position, and step
 
-    print(clusters)            
+    step = len(np_data[0])  #how many steps it takes for entire system to converge
+    pts = len(np_data)  # n values
+
+    for i in range(step):
+        # t_pts = []
+        # t_vals = []
+        # t_all_pts = []
+        # t_all_vals = []   // not used? maybe needed for storing
+
+        start = 0
+        end = 1
+        while (end<pts):
+            #contruct next cluster
+            if np.isclose(np_data[start][i], np_data[end][i]):
+                print("WOW A BANNANA")
+                end=1   # end += 1
+                continue 
+            ##we may have a new cluster at this point
+            if start < (end-1): #more than one point in the cluster
+                clusters = Cluster((start, end-1), np_data[start][i], i)
+                #store somewhere !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                print(clusters)
+                clusters = ((start, end-1), np_data[start][i], i)  #might need to fix this?? doesnt look right
+            end = end + 1  #start = end + 1
+
+    #print(clusters)    
+    # print("HELLO WE MADE IT!")        
 
 
 # def check_neighbors():
@@ -211,5 +241,7 @@ def collect_data(np_data):
 # Test Methods
 if __name__ == '__main__':
     #simulate(uniformHK(20))
-    # create_data(exponentialHK(5, 0.99))
-    simulate(exponentialHK(21, 0.99))
+    # create_data(exponentialHK(11, 0.99))
+    #simulate(exponentialHK(11, 0.99))
+    collect_data(create_data(exponentialHK(5, 0.99)))
+
