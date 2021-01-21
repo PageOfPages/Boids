@@ -198,26 +198,24 @@ def collect_data(np_data):
     pts = len(np_data)  # n values
 
     for i in range(step):
-        # t_pts = []
-        # t_vals = []
-        # t_all_pts = []
-        # t_all_vals = []   // not used? maybe needed for storing
 
         start = 0
         end = 1
         while (end<pts):
             #contruct next cluster
             if np.isclose(np_data[start][i], np_data[end][i]):
-                print(str(np_data[start][i]) + " and " + str(np_data[end][i]))
-                print(str(start) + " and " + str(end))
-                print("---------------")
-                end+=1   # end += 1
-                continue 
+                #print(str(np_data[start][i]) + " and " + str(np_data[end][i]))
+                #print(str(start) + " and " + str(end))
+                #print("---------------")
+                if (end < (pts-1)):
+                    end+=1   # end += 1
+                    continue 
+                end+=1
             ##we may have a new cluster at this point
-            if start < (end-1): #more than one point in the cluster
+            if (start < (end-2)) or (((step-1) == i) and  (start == (end-2))): #more than one point in the cluster
                 clusters = Cluster((start, end-1), np_data[start][i], i)
                 #store somewhere !!!    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                print(clusters)
+                #print(clusters)
                 # clusters = ((start, end-1), np_data[start][i], i)  #might need to fix this?? doesnt look right
                 start = end + 1  #end = end + 1
                 end = start + 1
@@ -249,5 +247,5 @@ if __name__ == '__main__':
     #simulate(uniformHK(20))
     # create_data(exponentialHK(5, 0.99))
     #simulanp_data[end][i]te(exponentialHK(11, 0.99))
-    collect_data(create_data(exponentialHK(5, 0.99)))
+    collect_data(create_data(exponentialHK(7, 0.99)))
 
