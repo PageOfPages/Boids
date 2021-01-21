@@ -208,16 +208,22 @@ def collect_data(np_data):
         while (end<pts):
             #contruct next cluster
             if np.isclose(np_data[start][i], np_data[end][i]):
-                print("WOW A BANNANA")
-                end=1   # end += 1
+                print(str(np_data[start][i]) + " and " + str(np_data[end][i]))
+                print(str(start) + " and " + str(end))
+                print("---------------")
+                end+=1   # end += 1
                 continue 
             ##we may have a new cluster at this point
             if start < (end-1): #more than one point in the cluster
                 clusters = Cluster((start, end-1), np_data[start][i], i)
-                #store somewhere !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                #store somewhere !!!    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 print(clusters)
-                clusters = ((start, end-1), np_data[start][i], i)  #might need to fix this?? doesnt look right
-            end = end + 1  #start = end + 1
+                # clusters = ((start, end-1), np_data[start][i], i)  #might need to fix this?? doesnt look right
+                start = end + 1  #end = end + 1
+                end = start + 1
+            else: 
+                start += 1
+                end += 1
 
     #print(clusters)    
     # print("HELLO WE MADE IT!")        
@@ -241,7 +247,7 @@ def collect_data(np_data):
 # Test Methods
 if __name__ == '__main__':
     #simulate(uniformHK(20))
-    # create_data(exponentialHK(11, 0.99))
-    #simulate(exponentialHK(11, 0.99))
+    # create_data(exponentialHK(5, 0.99))
+    #simulanp_data[end][i]te(exponentialHK(11, 0.99))
     collect_data(create_data(exponentialHK(5, 0.99)))
 
