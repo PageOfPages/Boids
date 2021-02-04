@@ -1,0 +1,30 @@
+Week 1:
+
+This Weeks assignment is to learn Latex and prepare a proof for potential. 
+LaTeX
+  - MacOS --> TeXShop
+  - Windows --> MilkTex
+Link to online documentation, https://www.overleaf.com/learn/latex/Learn_LaTeX_in_30_minutes
+After we're comfortable with LaTeX, we'll create a LaTeX pdf with a proof for the potential formula. 
+
+Next week we'll look closer at shende_code.py and incoperating the inertia formula.
+
+The current code still needs a way to store clusters. 
+SQLite - ways to free space:
+  - clamshell
+  - cs projects
+SQLite alternative is python module Shelves (https://docs.python.org/3/library/shelve.html)
+
+Month Goal:
+Create a simulation that tracks how potential changes after each step
+
+March Goal:
+Present Poster at CURCA. The event will be online. We'll prepare a poster and a recording.
+Our poster will compete against other posters in our category. There are about 50 groups
+participating. At the online event, live questions will be asked about our research. 
+  The Presentation:
+    - Demo simulation that tracks how potential changes after each step
+    - demonstrate,
+      1. how the rate of convergence is so diferent between dumbell system vs HK system
+      2. how on average, a random configuration of points (in a linear system) will converge fast. 
+
