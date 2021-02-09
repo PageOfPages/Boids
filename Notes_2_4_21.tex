@@ -1,0 +1,50 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{bm} %bm is for bold
+\usepackage{amsmath} %formatting math
+
+\title{Potential\vspace{-2em}}
+\date{February 4, 2021}
+
+\begin{document}
+
+\maketitle
+
+\[ 
+n \sum(x_i - \bm\bar{x}) = \sum_{i<j} (x_i - x_j)^2 
+\]
+
+\[
+\left[ {x_i} \;form \;a \;neighborhood \;around \;a \;pt. \;x \;of \;size \;n \right]
+% \; makes a thick space
+\]
+
+\[
+\bm\bar{x} = \frac{18}{4} = 4.5
+\]
+
+\[
+\begin{split}
+(x_1 - x_2)^2 = 4 \;&\bigg\vert\;(x_2 - x_3)^2 = 1 \\ 
+(x_1 - x_3)^2 = 9  \;&\bigg\vert\; (x_2 - x_4)^2 = 49 \\
+(x_1 - x_4)^2 = 81 \;&\bigg\vert\; (x_3 - x_4)^2 = 36 \\
+1 + 4 + 9 + 36& + 49 + 81 = 180 
+\end{split}
+\]
+
+\[\line(1, 0) {200}\]
+
+\[
+\begin{split}
+(x_1 - \bm\bar{x})^2 &= (\frac{7}{2})^2 = \frac{49}{4} \\
+(x_2 - \bm\bar{x})^2 &= (\frac{3}{2})^2 = \frac{9}{4} \\ 
+(x_3 - \bm\bar{x})^2 &= (\frac{1}{2})^2 = \frac{1}{4} \\ 
+(x_4 - \bm\bar{x})^2 &= (\frac{11}{2})^2 = \frac{121}{4} \\
+4(\frac{49}{4} + \frac{9}{4}& + \frac{1}{4} + \frac{121}{4}) = 180
+\end{split}
+\]
+
+\thispagestyle{empty} 
+%gets rid of page number
+
+\end{document}
