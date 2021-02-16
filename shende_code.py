@@ -144,6 +144,22 @@ def simulate(init_system):
             break
     print('System took {} steps to converge!'.format(step-1))
 
+def potential(config):
+    '''Calculates Potential of boid system
+    Args:
+
+    Returns:
+    
+    '''
+    for p in len(config):
+        neighbors = []
+        if p != 0:
+            while abs(config(p+1) - config(p)) > 1:
+                
+
+
+def simulatePotential():
+
 
 def create_data(init_system):
     """Determine HK dynamics of system
