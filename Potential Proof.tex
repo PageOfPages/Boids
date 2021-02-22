@@ -1,0 +1,71 @@
+\documentclass[12pt, fleqn]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{bm} %bm is for bold
+\usepackage{amsmath} %formatting math
+\usepackage[margin=2.5cm]{geometry}
+
+\setlength{\parindent}{0 in}
+
+\title{Potential Proof\vspace{-2em}}
+\date{February, 22, 2021}
+
+\begin{document}
+\maketitle
+
+\[ 
+n \sum_{i}(x_i - \bm\bar{x})^2 = \sum_{i<j} (x_i - x_j)^2 
+\]
+
+\textbf{Proof:\\}
+Suppose we have n points, $x_1, x_2, \ldots, x_n$ all in a neighborhood.
+
+\begin{align*}
+(x_i - x_j)^2 &= [(x_i - \bm\bar{x}) + (\bm\bar{x} - x_j)]^2 \\
+&= (x_i - \bm\bar{x})^2 + (x_j - \bm\bar{x})^2 + 2[(x_i - \bm\bar{x})(x_j - \bm\bar{x})]
+\end{align*}
+
+Now we will prove that $2[(x_i - \bm\bar{x})(x_j - \bm\bar{x})]$ equals 0 when we go through the summation. \\
+We want to calculate: \[\sum_{i, j}(x_i - \bm\bar{x})(x_j - \bm\bar{x})\] where $\bm\bar{x} = \frac{(x_1 + x_2 + \ldots + x_n)}{n}$
+\begin{align*}
+(x_1 - \bm\bar{x})&(x_1 - \bm\bar{x})\;     \:(x_2 - \bm\bar{x})(x_1 - \bm\bar{x})\; \ldots \:(x_n - \bm\bar{x})(x_1 - \bm\bar{x}) \\
+(x_1 - \bm\bar{x})&(x_2 - \bm\bar{x})\;     \:(x_2 - \bm\bar{x})(x_2 - \bm\bar{x})\; \ldots \:(x_n - \bm\bar{x})(x_2 - \bm\bar{x}) \\
+(x_1 - \bm\bar{x})&(x_3 - \bm\bar{x})\;     \:(x_2 - \bm\bar{x})(x_3 - \bm\bar{x})\; \ldots \:(x_n - \bm\bar{x})(x_3 - \bm\bar{x}) \\
+&\vdots \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \vdots \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \vdots \\
+(x_1 - \bm\bar{x})&(x_n - \bm\bar{x})\;     \:(x_2 - \bm\bar{x})(x_n - \bm\bar{x})\; \ldots \:(x_n - \bm\bar{x})(x_n - \bm\bar{x}) \\
+&\downarrow \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \downarrow \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \downarrow \\
+\sum_{i}(x_1 -& \bm\bar{x})(x_i - \bm\bar{x})\; \:\sum_{i}(x_2 - \bm\bar{x})(x_i - \bm\bar{x})\; \:\sum_{i}(x_n - \bm\bar{x})(x_i - \bm\bar{x}) 
+\end{align*}
+
+Let's look at the first group, observe that the factor $(x_1 - \bm\bar{x})$ is a common factor of all the terms. \\
+This makes it a constant in terms of the summation
+\begin{align*}
+\sum_{i}(x_1 - \bm\bar{x})(x_i - \bm\bar{x}) &= (x_1 - \bm\bar{x})\sum_{i}(x_i - \bm\bar{x}) \\
+\mbox{But:  } \sum_{i}(x_i - \bm\bar{x}) &= \sum_{i}x_i - \sum_{i}\bm\bar{x} \\
+&= \sum_{i}x_i - \bm\bar{x}\sum_{i}1 \\
+&= (x_1 + x_2 + \ldots + x_n) - n(\bm\bar{x}) \\
+&= n\bm\bar{x} - n\bm\bar{x} = 0 \\
+\end{align*}
+So each group sums to zero, and hence, summing all the groups yields 0. \\
+Therefore, $2[(x_i - \bm\bar{x})(x_j - \bm\bar{x})]$ equals 0 when we go through the summation. \\
+
+Finally, lets finish the proof:
+\begin{align*}
+(x_1 &- x_1)^2 = 0 \\
+(x_1 &- x_2)^2 =  (x_1 - \bm\bar{x})^2 + (x_2 - \bm\bar{x})^2 \\
+(x_1 &- x_3)^2 =  (x_1 - \bm\bar{x})^2 + (x_3 - \bm\bar{x})^2 \\
+&\vdots \\
+(x_1 &- x_n)^2 = (x_1 - \bm\bar{x})^2 + (x_n - \bm\bar{x})^2 \\
+&\vdots \\
+(x_n &- x_n)^2 = 0 
+\end{align*}
+\[\line(1, 0) {200}\]
+\begin{align*}
+\sum_{i, j} (x_i - x_j)^2 &= 2n(x_1 - \bm\bar{x})^2 + 2n(x_2 - \bm\bar{x})^2 + \ldots + 2n(x_n - \bm\bar{x})^2 \\
+&= 2n\sum_{i}(x_i - \bm\bar{x})^2 \\
+\sum_{i<j} (x_i - x_j)^2 &= n\sum_{i}(x_i - \bm\bar{x})^2
+\end{align*}
+
+Therefore, \[n \sum_{i}(x_i - \bm\bar{x})^2 = \sum_{i<j} (x_i - x_j)^2\]
+
+
+\end{document}
