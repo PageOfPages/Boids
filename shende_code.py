@@ -45,7 +45,6 @@ def neighborhood(config):
 
 def hk_next_config(config):
     """Returns the next configuration
-
     Args:
         config (dict): point-index -> position fraction
     """
@@ -117,7 +116,6 @@ def exponentialHK(n, alpha):
     
 #     return steps  
  
- 
 def randomHK(n):
     return dict(zip(range(n+1), sorted(random.uniform(1, n+1)
                                        for i in range(1,n+1))))
@@ -137,6 +135,7 @@ def simulate(init_system):
             print('\tAgent {}: {:.3f} or {}'.format(pt,
                                                     float(evolution[step][pt]),
                                                     (evolution[step][pt])))
+        potential(evolution[step])
         step += 1
         evolution[step] = hk_next_config(evolution[step-1])
         print('Positions: ')
@@ -147,19 +146,59 @@ def simulate(init_system):
 def potential(config):
     '''Calculates Potential of boid system
     Args:
-
     Returns:
     
     '''
-    for p in len(config):
-        neighbors = []
-        if p != 0:
-            while abs(config(p+1) - config(p)) > 1:
+    
+
+    # curr_neigh = neighborhood(config) #dict of pts and each pt's endpoints stored in a tuple
+    # print("Neighbos: "+ str(curr_neigh))
+    # for pt in config: #looking at the value of each point in config, ex. agent 1 at step one is 1.5
+    #     t_sum = 0
+    #     sum1 = 0
+    #     sum2 = 0
+    #     left_end, right_end = curr_neigh[pt]
+    #     if (left_end != right_end and (config[left_end] != config[right_end])):  # If you have neighbors then you have potential
+    #         for c in range(left_end, right_end):
+    #             sum1 += config[c]**2
+    #             if right_end-left_end > 1: # more than 2 pts in group
+    #                 sum2 += config[c]
+    #                 if c > left_end: # at the secons elem in the group
+    #                     t_sum += sum2**2
+    #         t_sum += sum1
+    
+    ############### POTENTIAL CODE #####################
+
+    curr_neigh = neighborhood(config) #dict of pts and each pt's endpoints stored in a tuple
+    sum = 0
+    for pt in config: #looking at the value of each point in config, ex. agent 1 at step one is 1.5
+        left_end, right_end = curr_neigh[pt]
+        for c in range(left_end, right_end+1):
+            for d in range(left_end, c):
+                sum += ((config[c] - config[d]))**2
                 
+    ####################################################
 
+    # nums = []
+    # for n in systm:
+    #     nums.append(systm[n])
+    # diffs = [v for v in np.diff(nums) if v<=1.0]
+    print('Potential: {}'.format(round(float(sum),2))) #should return here, but for current purposes we'll print
 
-def simulatePotential():
-
+    # t_sum1 = 0
+    # t_sum2 = 0
+    # curr_neigh = neighborhood(config)
+    # for pt in config:
+    #     sum1 = 0
+    #     sum2 = 0
+    #     left_end, right_end = curr_neigh[pt]
+    #     if (left_end != right_end):  # If you have neighbors then you have potential
+    #         for c in range(left_end, right_end):
+    #             sum1 += config[c]**2
+    #             sum2 += config[c]
+    #         t_sum1 += sum1
+    #         t_sum2 += sum2
+    # print('Potential: {}'.format(t_sum1 + t_sum2**2))  #should return here, but for current purposes we'll print
 
 def create_data(init_system):
     """Determine HK dynamics of system
@@ -260,8 +299,7 @@ def collect_data(np_data):
 
 # Test Methods
 if __name__ == '__main__':
-    #simulate(uniformHK(20))
+    simulate(uniformHK(7))
     # create_data(exponentialHK(5, 0.99))
     #simulanp_data[end][i]te(exponentialHK(11, 0.99))
-    collect_data(create_data(exponentialHK(7, 0.99)))
-
+    #collect_data(create_data(exponentialHK(7, 0.99)))
